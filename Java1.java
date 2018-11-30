@@ -1,1 +1,3 @@
-凄凄切切
+public class yu{
+  
+}
