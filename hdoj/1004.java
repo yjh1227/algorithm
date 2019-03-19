@@ -25,7 +25,7 @@ public class Main {
 				hash.put(str, temp);
 			}
 			Set<String> keyS = hash.keySet();
-			// 方法一：返回包含Map中所有关键字（key）的Set对象
+			// 鏂规硶涓�锛氳繑鍥炲寘鍚玀ap涓墍鏈夊叧閿瓧锛坘ey锛夌殑Set瀵硅薄
 			String ans = "";
 			int max = -1;
 			for (String s : keyS) {
@@ -36,7 +36,7 @@ public class Main {
 				}
 			}
 			System.out.println(ans);
-//方法二：
+//鏂规硶浜岋細
 			// String ans = "";
 			// int max = -1;
 			// Iterator<Entry<String,Integer>> iter=hash.entrySet().iterator();
