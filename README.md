@@ -10,3 +10,8 @@
 插入排序过程
 
 ![image](插入排序.png)
+
+
+
+# java解决排列组合问题:
+https://blog.csdn.net/Ring_k/article/details/79575533
