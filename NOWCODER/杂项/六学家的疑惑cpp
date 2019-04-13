@@ -1,0 +1,113 @@
+
+题目描述 
+小六喜欢两全其美的事情，今天就正好有一个这样的机会。
+
+小六面前有两根管子，管子里面放满了数字为1到9的小球。每次取球时，小六会先选择一根管子，再从这根管子的某一侧（左侧或右侧）取出一个球。在满足取球规则的情况下，他可以任意顺序取出所有小球。假如小六依次取出的球的编号为
+a
+1
+,
+a
+2
+,
+⋯
+,
+a
+n
+a1,a2,⋯,an，则他最后就得到了一个形如
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+a
+1
+a
+2
+⋯
+a
+n
+a1a2⋯an¯样的十进制数。
+
+小六希望他的取球顺序所组成的数是最大的，你可以帮一下他吗？
+输入描述:
+第一行输入数据组数。
+T
+ 
+(
+T
+≤
+14
+)
+T (T≤14)
+
+接下来T行，每行输入两串只含
+1
+∼
+9
+1∼9的数字，表示两根管子里的小球的数字。每根管子内至少含1个小球，且数量不超过40个。
+输出描述:
+对每一组数据，输出一行Case #x: A，其中x是数据组数编号（从1开始），A是小六能组成的最大的数。
+示例1
+输入
+复制
+2
+123456 123456
+9876346789 9854894589
+输出
+复制
+Case #1: 665544332211
+Case #2: 99998888776655498443
+
+
+#include<bits/stdc++.h>
+#define rep(i,x,y) for(int i=(x);i<=(y);++i)
+#define dep(i,x,y) for(int i=(x);i>=(y);--i)
+#define add(x,y) if((x+=(y))>=mo)x-=mo
+#define pb push_back
+#define fr first
+#define sc second
+#define gc getchar()
+#define clz __builtin_clz
+#define ctz __builtin_ctz
+#define N 1000010
+#define mo 1000000007
+#define inf 1000000000
+#define Inf 1000000000000000000ll
+using namespace std;
+typedef long long ll;
+struct pr{int s1,t1,s2,t2;};
+vector<pr>d[2];
+void sol(){
+    string s1,s2,ans;
+    cin>>s1>>s2;ans.clear();
+    int n=s1.length(),m=s2.length();
+    int r=0;d[r].clear();
+    d[r].pb({0,n-1,0,m-1});
+    rep(i,1,n+m){
+        r^=1;d[r].clear();char s='0';
+        for(auto i:d[r^1]){
+            if(i.s1<=i.t1){
+                s=max(s,s1[i.s1]);
+                s=max(s,s1[i.t1]);
+            }
+            if(i.s2<=i.t2){
+                s=max(s,s2[i.s2]);
+                s=max(s,s2[i.t2]);
+            }
+        }
+        ans+=s;
+        for(auto i:d[r^1]){
+            if(i.s1<=i.t1){
+                if(s1[i.s1]==s)d[r].pb({i.s1+1,i.t1,i.s2,i.t2});
+                if(s1[i.t1]==s)d[r].pb({i.s1,i.t1-1,i.s2,i.t2});
+            }
+            if(i.s2<=i.t2){
+                if(s2[i.s2]==s)d[r].pb({i.s1,i.t1,i.s2+1,i.t2});
+                if(s2[i.t2]==s)d[r].pb({i.s1,i.t1,i.s2,i.t2-1});
+            }
+        }
+    }
+    cout<<ans<<'\n';
+}
+int main(){int T;
+    scanf("%d",&T);
+    rep(i,1,T){
+        printf("Case #%d: ",i);sol();
+    }
+}
